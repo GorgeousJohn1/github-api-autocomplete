@@ -1,0 +1,77 @@
+* {
+  box-sizing: border-box;
+  font-size: 24px;
+  font-family: "Roboto", sans-serif;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./Roboto-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+.wrap {
+  max-width: 660px;
+  min-width: 600px;
+  height: 100vh;
+  background-color: #c4c4c4;
+  margin: 0 auto;
+  padding: 2.5rem 0;
+}
+
+.search {
+  display: block;
+  width: 500px;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  padding-left: 0.5rem;
+  padding-top: 5px;
+  padding-right: 0.5rem;
+}
+
+.search__input {
+  width: 500px;
+  background-color: white;
+  border-radius: 6px;
+  font-size: 2rem;
+}
+
+.search__list {
+  width: 500px;
+}
+
+.search__item {
+  height: 44px;
+  background-color: #e3e3e3;
+  border: 2px solid #000000;
+  padding-left: 0.5rem;
+  font-size: 1.25rem;
+  border-bottom: none;
+}
+
+.search__item:last-child {
+  border: 2px solid #000000;
+}
+
+.search__item:hover {
+  background-color: #65cdf9;
+  cursor: pointer;
+}
+
+.card-container {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.card {
+  width: 500px;
+  height: 100px;
+  background-color: #e27beb;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
