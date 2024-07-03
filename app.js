@@ -17,7 +17,8 @@ function createNewElement(tag, className, content = "") {
 
 //Инпут, селект и контейнер карточек
 const searchInput = document.querySelector(".search__input");
-const searchList = document.querySelector(".search__list");
+const search = document.querySelector(".search");
+const searchList = createNewElement("ul", "search__list");
 const cardContainer = document.querySelector(".card-container");
 
 // url https://api.github.com/search/repositories?q=
@@ -28,32 +29,29 @@ searchInput.addEventListener(
   "input",
   debounce((event) => {
     if (event.keyCode === 32) return;
-    if (document.querySelector(".search__item")) {
-      while (searchList.firstChild) {
-        searchList.removeChild(searchList.firstChild);
-      }
-    }
+
     if (!searchInput.value) {
-      while (searchList.firstChild) {
-        searchList.removeChild(searchList.firstChild);
-      }
+      searchList.remove();
       return;
     }
     fetch(`https://api.github.com/search/repositories?q=${searchInput.value}`)
       .then((response) => response.json())
       .then((data) => {
+        searchList.remove();
         const reposArr = data.items.slice(0, 5);
         reposArr.forEach((repo) => {
-          const list = createNewElement("li", "search__item", repo.name);
+          const listItem = createNewElement("li", "search__item", repo.name);
           const repoInfo = {
             repoName: repo.name,
             repoOwner: repo.owner.login,
             repoStars: repo.stargazers_count,
           };
-          list.setAttribute("data-info", JSON.stringify(repoInfo));
-          searchList.appendChild(list);
+          listItem.setAttribute("data-info", JSON.stringify(repoInfo));
+          searchList.appendChild(listItem);
         });
+        search.appendChild(searchList);
       });
+    searchList.textContent = "";
   }, 300)
 );
 
@@ -103,9 +101,7 @@ searchList.addEventListener("click", (event) => {
 
   searchInput.value = "";
 
-  while (searchList.firstChild) {
-    searchList.removeChild(searchList.firstChild);
-  }
+  searchList.remove();
 });
 
 cardContainer.addEventListener("click", (event) => {
